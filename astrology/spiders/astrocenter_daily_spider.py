@@ -2,7 +2,7 @@ import scrapy
 
 
 class QuotesSpider(scrapy.Spider):
-	name = "daily"
+	name = "astrocenter_daily"
 
 	def start_requests(self):
 		todays = [
@@ -47,7 +47,7 @@ class QuotesSpider(scrapy.Spider):
 		yield {
 			'Date': response.css('div.fontpost::text').extract_first(),
 			'Sign': response.xpath('//div/img/@alt').extract_first().split()[0],
-			'Horoscope': response.css('div.fontdef1::text').extract_first(),
+			'Horoscope': response.css('div.fontdef1::text').extract_first().strip(),
 			'Time_Frame': 'Day'
 		}
 #	next_page = response.css('li.next a::attr(href)').extract_first()
